@@ -22,12 +22,13 @@ REST API reader for vera
 	- inputObjectType - GET/POST
 	
 	- Examples:
-	1.
-	  - inputObjectName := "ADC01"
-	  - inputObjectType := "GET"
+	  1. Option
+	    - inputObjectName := "ADC01"
+	    - inputObjectType := "GET"
 		GET /inputs/ADC01 HTTP/1.1  
 		Host: 192.168.1.16:3500   
-	2. 	- inputObjectName := '{"resourcename" : "ADC01"}'  
+	  2. Option 	
+	    - inputObjectName := '{"resourcename" : "ADC01"}'  
 		- inputObjectType := "POST"  
 		POST /inputs/ADC01 HTTP/1.1  
 		Host: 192.168.1.16:3500  
