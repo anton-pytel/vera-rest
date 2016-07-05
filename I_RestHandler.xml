@@ -1,0 +1,52 @@
+<?xml version="1.0"?>
+<implementation>
+  <functions>
+    package.loaded.L_RestHandler = nil
+    restHandler = require ("L_RestHandler")    
+	RESTHANDLE_SERVICE = restHandler.RESTHANDLE_SERVICE
+    function nextRead()
+	  restHandler.doRead()
+    end	
+    function startup(lul_device)
+	  restHandler.initialize(lul_device)
+    end
+  </functions>
+  <incoming>
+      luup.log("when does this happen")
+  </incoming>
+  <startup>startup</startup>
+  <actionList>
+    <action>
+      <serviceId>urn:demo-micasaverde-com:serviceId:HandleRest1</serviceId>
+      <name>setRestUrl</name>
+      <run>
+        luup.variable_set(RESTHANDLE_SERVICE, "restUrl", lul_settings.xUrl or "", lul_device)
+      </run>
+    </action>
+	<action>
+	 <serviceId>urn:demo-micasaverde-com:serviceId:HandleRest1</serviceId>
+	 <name>handleRest</name>
+	   <run>
+		 yValue = restHandler.readResource(lul_settings.xParam, lul_settings.xType, lul_settings.xSamplePeriod)
+		 if yValue then
+			 luup.variable_set(RESTHANDLE_SERVICE, "outputObjectValue", yValue, lul_device)
+			 luup.call_timer("nextRead", 1, tostring(lul_settings.xSamplePeriod), "")
+		 end
+	   </run>
+	</action>	  	
+    <action>
+      <serviceId>urn:demo-micasaverde-com:serviceId:HandleRest1</serviceId>
+      <name>setBypass</name>
+      <run>
+        luup.variable_set(RESTHANDLE_SERVICE, "bypass", "1", lul_device)
+      </run>
+    </action>	
+    <action>
+      <serviceId>urn:demo-micasaverde-com:serviceId:HandleRest1</serviceId>
+      <name>unsetBypass</name>
+      <run>
+        luup.variable_set(RESTHANDLE_SERVICE, "bypass", "0", lul_device)
+      </run>
+    </action>			
+  </actionList>
+</implementation>

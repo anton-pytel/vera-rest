@@ -1,0 +1,93 @@
+<?xml version="1.0"?>
+<scpd xmlns="urn:schemas-upnp-org:service-1-0">
+  <specVersion>
+    <major>1</major>
+    <minor>0</minor>
+  </specVersion>
+  <serviceStateTable>  
+	<stateVariable sendEvents="no">
+       <name>bypass</name>
+       <dataType>boolean</dataType>
+       <defaultValue>0</defaultValue>
+	   <shortCode>bypass</shortCode>
+    </stateVariable>  
+	<stateVariable sendEvents="no">
+       <name>restUrl</name>
+       <dataType>string</dataType>
+       <defaultValue>http://192.168.1.16:3500/inputs</defaultValue>
+	   <shortCode>restUrl</shortCode>
+    </stateVariable>
+	<stateVariable sendEvents="no">
+       <name>outputObjectName</name>
+       <dataType>string</dataType>
+       <defaultValue>value</defaultValue>
+	   <shortCode>outputObjectName</shortCode>
+    </stateVariable> 
+	<stateVariable sendEvents="no">
+       <name>outputObjectValue</name>
+       <dataType>string</dataType>
+       <defaultValue>0</defaultValue>
+	   <shortCode>outputObjectValue</shortCode>
+    </stateVariable> 	
+	<stateVariable sendEvents="no">
+       <name>inputObjectName</name>
+       <dataType>string</dataType>
+       <defaultValue>ADC01</defaultValue>
+	   <shortCode>inputObjectName</shortCode>
+    </stateVariable>  		
+	<stateVariable sendEvents="no">
+       <name>inputObjectType</name>
+       <dataType>string</dataType>
+       <defaultValue>GET</defaultValue>
+	   <shortCode>inputObjectType</shortCode>
+    </stateVariable> 	
+	<stateVariable sendEvents="no">
+	   <name>samplePeriod</name>          
+	   <dataType>ui4</dataType> 
+	   <defaultValue>600</defaultValue> 
+	   <shortCode>samplePeriod</shortCode>
+	</stateVariable>	
+  <actionList>
+    <action>
+      <name>setRestUrl</name>
+	  <argumentList>
+		<argument>
+          <name>xUrl</name>
+          <direction>in</direction>
+          <relatedStateVariable>restUrl</relatedStateVariable>
+        </argument>
+      </argumentList>
+	</action>
+    <action>	
+      <name>handleRest</name>
+	  <argumentList>
+		<argument>
+          <name>xParam</name>
+          <direction>in</direction>
+          <relatedStateVariable>inputObjectName</relatedStateVariable>
+        </argument>
+		<argument>
+          <name>xType</name>
+          <direction>in</direction>
+          <relatedStateVariable>inputObjectType</relatedStateVariable>
+        </argument>		
+		<argument>
+          <name>xSamplePeriod</name>
+          <direction>in</direction>
+          <relatedStateVariable>samplePeriod</relatedStateVariable>
+        </argument>		
+		<argument>
+          <name>yValue</name>
+          <direction>out</direction>
+          <relatedStateVariable>outputObjectValue</relatedStateVariable>
+        </argument>			
+      </argumentList>
+    </action>	  
+    <action>
+      <name>setBypass</name>  
+    </action>	
+    <action>
+      <name>unsetBypass</name>  
+    </action>		
+  </actionList>
+</scpd>

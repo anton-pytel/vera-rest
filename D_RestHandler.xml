@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<root xmlns="urn:schemas-upnp-org:device-1-0">
+  <specVersion>
+    <major>1</major>
+    <minor>0</minor>
+  </specVersion>
+  <device>
+    <deviceType>urn:demo-micasaverde-com:device:RestHandler:1</deviceType>
+    <staticJson>D_RestHandler.json</staticJson> 
+    <friendlyName>Client for handling REST APIs</friendlyName>
+    <manufacturer>Anthony</manufacturer>
+	<handleChildren>1</handleChildren>
+    <serviceList>
+      <service>
+        <serviceType>urn:schemas-micasaverde-com:service:HandleRest:1</serviceType>
+        <serviceId>urn:demo-micasaverde-com:serviceId:HandleRest1</serviceId>
+        <SCPDURL>S_RestHandler.xml</SCPDURL>
+      </service>
+    </serviceList>
+    <implementationList>
+      <implementationFile>I_RestHandler.xml</implementationFile>
+    </implementationList>
+  </device>
+</root>
