@@ -24,17 +24,17 @@ REST API reader for vera
 	- Examples:
 	  1. Option
 	    - inputObjectName := "ADC01"
-	    - inputObjectType := "GET"
-		GET /inputs/ADC01 HTTP/1.1  
-		Host: 192.168.1.16:3500   
+	    - inputObjectType := "GET"  
+		   GET /inputs/ADC01 HTTP/1.1  
+		   Host: 192.168.1.16:3500   
 	  2. Option 	
 	    - inputObjectName := '{"resourcename" : "ADC01"}'  
 		- inputObjectType := "POST"  
-		POST /inputs/ADC01 HTTP/1.1  
-		Host: 192.168.1.16:3500  
-		Content-Type: application/json  
-
-		{ "resourcename" : "ADC01"}  
+		   POST /inputs/ADC01 HTTP/1.1  
+		   Host: 192.168.1.16:3500  
+		   Content-Type: application/json  
+		
+		   { "resourcename" : "ADC01"}  
   - samplePeriod - How often should REST API be called, if set to 0, then next job will NOT be scheduled
 
 Control
