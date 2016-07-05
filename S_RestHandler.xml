@@ -47,6 +47,7 @@
 	   <defaultValue>600</defaultValue> 
 	   <shortCode>samplePeriod</shortCode>
 	</stateVariable>	
+  </serviceStateTable>	
   <actionList>
     <action>
       <name>setRestUrl</name>
@@ -76,6 +77,11 @@
           <direction>in</direction>
           <relatedStateVariable>samplePeriod</relatedStateVariable>
         </argument>		
+		<argument>
+          <name>xObjectResult</name>
+          <direction>in</direction>
+          <relatedStateVariable>outputObjectName</relatedStateVariable>
+        </argument>			
 		<argument>
           <name>yValue</name>
           <direction>out</direction>

@@ -34,3 +34,8 @@ inputObjectType - GET/POST
 
 		{ "resourcename" : "ADC01"}
 samplePeriod - How often should REST API be called, if set to 0, then next job will NOT be scheduled
+
+Control
+-------
+- Start polling by start button
+- Stop polling by Set/stop button

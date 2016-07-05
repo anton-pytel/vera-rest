@@ -27,10 +27,9 @@
 	 <serviceId>urn:demo-micasaverde-com:serviceId:HandleRest1</serviceId>
 	 <name>handleRest</name>
 	   <run>
-		 yValue = restHandler.readResource(lul_settings.xParam, lul_settings.xType, lul_settings.xSamplePeriod)
+		 yValue = restHandler.readResource(lul_settings.xParam, lul_settings.xType, lul_settings.xSamplePeriod, lul_settings.xObjectResult)
 		 if yValue then
 			 luup.variable_set(RESTHANDLE_SERVICE, "outputObjectValue", yValue, lul_device)
-			 luup.call_timer("nextRead", 1, tostring(lul_settings.xSamplePeriod), "")
 		 end
 	   </run>
 	</action>	  	

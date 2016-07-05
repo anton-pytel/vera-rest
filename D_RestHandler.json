@@ -1,5 +1,5 @@
 {
-    "flashicon": "http://192.168.1.15/speedometer.png",
+    "flashicon": "http://192.168.1.15/rest.png",
     "imgIconBody": "",
     "imgIconDimmable": "",
     "imgIconTurnable": "",
@@ -52,6 +52,44 @@
             ],
             "Control": [
                 {
+                    "ControlGroup": "1",
+                    "ControlPair": "1",
+                    "ControlHeader": "1",
+                    "ControlType": "variable",
+                    "top": "1",
+                    "left": "0",
+					"x": "2",
+					"y": "2",
+                    "Display": {
+                        "Service": "urn:demo-micasaverde-com:serviceId:HandleRest1",
+                        "Variable": "outputObjectValue",
+                        "Top": 240,
+                        "Left": 50,
+                        "Width": 120,
+                        "Height": 20
+                    }
+                },	
+                {
+                    "ControlGroup": "2",
+                    "ControlPair": "2",
+                    "ControlHeader": "1",
+                    "ControlType": "label",
+                    "top": "0",
+                    "left": "0",
+					"x": "2",
+					"y": "2",
+					"Label": {
+                        "lang_tag": "device_settings_page",
+                        "text": "Result:"
+                    },
+                    "Display": {
+                        "Top": 225,
+                        "Left": 50,
+                        "Width": 120,
+                        "Height": 20
+                    }
+                },				
+                {
                     "ControlType": "label",
                     "Label": {
                         "lang_tag": "device_settings_page",
@@ -67,7 +105,7 @@
                 {
                     "ControlType": "variable",
                     "Display": {
-                        "Service": "urn:demo-micasaverde-com:serviceId:MpcControl1",
+                        "Service": "urn:demo-micasaverde-com:serviceId:HandleRest1",
                         "Variable": "bypass",
                         "Top": 15,
                         "Left": 180,
@@ -79,7 +117,7 @@
                     "ControlType": "button",
                     "Label": {
                         "lang_tag": "cmd_set",
-                        "text": "Set"
+                        "text": "Unset"
                     },
                     "Display": {
                         "Top": 31,
@@ -88,7 +126,7 @@
                         "Height": 20
                     },
                     "Command": {
-                        "Service": "urn:demo-micasaverde-com:serviceId:MpcControl1",
+                        "Service": "urn:demo-micasaverde-com:serviceId:HandleRest1",
                         "Action": "unsetBypass"
                     }					
                 },
@@ -96,16 +134,16 @@
                     "ControlType": "button",
                     "Label": {
                         "lang_tag": "cmd_set",
-                        "text": "Set"
+                        "text": "Set/Stop"
                     },
                     "Display": {
                         "Top": 31,
-                        "Left": 150,
-                        "Width": 60,
+                        "Left": 130,
+                        "Width": 110,
                         "Height": 20
                     },
                     "Command": {
-                        "Service": "urn:demo-micasaverde-com:serviceId:MpcControl1",
+                        "Service": "urn:demo-micasaverde-com:serviceId:HandleRest1",
                         "Action": "setBypass"
                     }
                 },				
@@ -113,7 +151,7 @@
                     "ControlType": "label",
                     "Label": {
                         "lang_tag": "device_settings_page",
-                        "text": "Controller URL"
+                        "text": "Resource URL"
                     },
                     "Display": {
                         "Top": 20,
@@ -125,8 +163,8 @@
                 {
                     "ControlType": "variable",
                     "Display": {
-                        "Service": "urn:demo-micasaverde-com:serviceId:MpcControl1",
-                        "Variable": "mpcUrl",
+                        "Service": "urn:demo-micasaverde-com:serviceId:HandleRest1",
+                        "Variable": "restUrl",
                         "Top": 36,
                         "Left": 290,
                         "Width": 240,
@@ -135,7 +173,7 @@
                 },				
                 {
                     "ControlType": "input",
-                    "ID": "mpcUrl",
+                    "ID": "restUrl",
                     "Display": {
                         "Top": 68,
                         "Left": 290,
@@ -157,12 +195,12 @@
                         "Height": 20
                     },
                     "Command": {
-                        "Service": "urn:demo-micasaverde-com:serviceId:MpcControl1",
-                        "Action": "setMpcUrl",
+                        "Service": "urn:demo-micasaverde-com:serviceId:HandleRest1",
+                        "Action": "setRestUrl",
                         "Parameters": [
                             {
                                 "Name": "xUrl",
-                                "ID": "mpcUrl"
+                                "ID": "restUrl"
                             }
                         ]
                     }
@@ -171,7 +209,7 @@
                     "ControlType": "label",
                     "Label": {
                         "lang_tag": "device_settings_page",
-                        "text": "Transfer function"
+                        "text": "Resource parameter"
                     },
                     "Display": {
                         "Top": 60,
@@ -183,17 +221,17 @@
                 {
                     "ControlType": "variable",
                     "Display": {
-                        "Service": "urn:demo-micasaverde-com:serviceId:MpcControl1",
-                        "Variable": "transferFunction",
+                        "Service": "urn:demo-micasaverde-com:serviceId:HandleRest1",
+                        "Variable": "inputObjectName",
                         "Top": 60,
-                        "Left": 150,
+                        "Left": 220,
                         "Width": 100,
                         "Height": 20
                     }
                 },
                 {
                     "ControlType": "input",
-                    "ID": "transferFunction",
+                    "ID": "inputObjectName",
                     "Display": {
                         "Top": 78,
                         "Left": 50,
@@ -205,7 +243,7 @@
                     "ControlType": "label",
                     "Label": {
                         "lang_tag": "device_settings_page",
-                        "text": "Transfer function type: "
+                        "text": "Resource method (GET/POST)"
                     },
                     "Display": {
                         "Top": 105,
@@ -217,17 +255,17 @@
 				{
                     "ControlType": "variable",
                     "Display": {
-                        "Service": "urn:demo-micasaverde-com:serviceId:MpcControl1",
-                        "Variable": "transFuncType",
+                        "Service": "urn:demo-micasaverde-com:serviceId:HandleRest1",
+                        "Variable": "inputObjectType",
                         "Top": 105,
-                        "Left": 180,
+                        "Left": 220,
                         "Width": 100,
                         "Height": 20						
                     }
                 },
                 {
                     "ControlType": "input",
-                    "ID": "transFuncType",
+                    "ID": "inputObjectType",
                     "Display": {
                         "Top": 121,
                         "Left": 50,
@@ -239,7 +277,7 @@
                     "ControlType": "label",
                     "Label": {
                         "lang_tag": "device_settings_page",
-                        "text": "MPC id: "
+                        "text": "Result Value: "
                     },
                     "Display": {
                         "Top": 155,
@@ -251,8 +289,8 @@
 				{
                     "ControlType": "variable",
                     "Display": {
-                        "Service": "urn:demo-micasaverde-com:serviceId:MpcControl1",
-                        "Variable": "mpcid",
+                        "Service": "urn:demo-micasaverde-com:serviceId:HandleRest1",
+                        "Variable": "outputObjectValue",
                         "Top": 175,
                         "Left": 50,
                         "Width": 100,
@@ -275,7 +313,7 @@
                 {
                     "ControlType": "variable",
                     "Display": {
-                        "Service": "urn:demo-micasaverde-com:serviceId:MpcControl1",
+                        "Service": "urn:demo-micasaverde-com:serviceId:HandleRest1",
                         "Variable": "samplePeriod",
                         "Top": 105,
                         "Left": 420,
@@ -297,7 +335,7 @@
                     "ControlType": "label",
                     "Label": {
                         "lang_tag": "device_settings_page",
-                        "text": "Input Delay"
+                        "text": "Output object structure"
                     },
                     "Display": {
                         "Top": 150,
@@ -309,8 +347,8 @@
                 {
                     "ControlType": "variable",
                     "Display": {
-                        "Service": "urn:demo-micasaverde-com:serviceId:MpcControl1",
-                        "Variable": "inputDelay",
+                        "Service": "urn:demo-micasaverde-com:serviceId:HandleRest1",
+                        "Variable": "outputObjectName",
                         "Top": 150,
                         "Left": 420,
                         "Width": 240,
@@ -319,7 +357,7 @@
                 },
                 {
                     "ControlType": "input",
-                    "ID": "inputDelay",
+                    "ID": "outputObjectName",
                     "Display": {					
                         "Top": 165,
                         "Left": 290,
@@ -331,7 +369,7 @@
                     "ControlType": "button",
                     "Label": {
                         "lang_tag": "cmd_set",
-                        "text": "Set"
+                        "text": "Start"
                     },
                     "Display": {
                         "Top": 165,
@@ -340,476 +378,28 @@
                         "Height": 20
                     },
                     "Command": {
-                        "Service": "urn:demo-micasaverde-com:serviceId:MpcControl1",
-                        "Action": "setMpc",
+                        "Service": "urn:demo-micasaverde-com:serviceId:HandleRest1",
+                        "Action": "handleRest",
                         "Parameters": [
                             {
-                                "Name": "xTransFunc",
-                                "ID": "transferFunction"
+                                "Name": "xParam",
+                                "ID": "inputObjectName"
                             },
                             {
-                                "Name": "xTransFuncType",
-                                "ID": "transFuncType"
+                                "Name": "xType",
+                                "ID": "inputObjectType"
                             },
                             {
                                 "Name": "xSamplePeriod",
                                 "ID": "samplePeriod"
                             },
                             {
-                                "Name": "xInputDelay",
-                                "ID": "inputDelay"
+                                "Name": "xObjectResult",
+                                "ID": "outputObjectName"
                             }							
                         ]
                     }
-                },
-                {
-                    "ControlType": "label",
-                    "Label": {
-                        "lang_tag": "device_settings_page",
-                        "text": "------------------------------------------"
-                    },
-                    "Display": {
-                        "Top": 200,
-                        "Left": 50,
-                        "Width": 120,
-                        "Height": 10
-                    }
-                },		
-{
-                    "ControlType": "label",
-                    "Label": {
-                        "lang_tag": "device_settings_page",
-                        "text": "Controlled device id"
-                    },
-                    "Display": {
-                        "Top": 210,
-                        "Left": 50,
-                        "Width": 120,
-                        "Height": 20
-                    }
-                },
-                {
-                    "ControlType": "variable",
-                    "Display": {
-                        "Service": "urn:demo-micasaverde-com:serviceId:MpcControl1",
-                        "Variable": "ctrlDeviceId",
-                        "Top": 210,
-                        "Left": 180,
-                        "Width": 100,
-                        "Height": 20
-                    }
-                },
-                {
-                    "ControlType": "input",
-                    "ID": "ctrlDeviceId",
-                    "Display": {
-                        "Top": 230,
-                        "Left": 50,
-                        "Width": 100,
-                        "Height": 20
-                    }
-                },				
-                {
-                    "ControlType": "label",
-                    "Label": {
-                        "lang_tag": "device_settings_page",
-                        "text": "Controlled device service id "
-                    },
-                    "Display": {
-                        "Top": 270,
-                        "Left": 50,
-                        "Width": 120,
-                        "Height": 20
-                    }
-                },
-				{
-                    "ControlType": "variable",
-                    "Display": {
-                        "Service": "urn:demo-micasaverde-com:serviceId:MpcControl1",
-                        "Variable": "ctrlServiceId",
-                        "Top": 320,
-                        "Left": 50,
-                        "Width": 100,
-                        "Height": 20						
-                    }
-                },
-                {
-                    "ControlType": "input",
-                    "ID": "ctrlServiceId",
-                    "Display": {
-                        "Top": 290,
-                        "Left": 50,
-                        "Width": 100,
-                        "Height": 20					
-                    }
-                },								
-                {
-                    "ControlType": "label",
-                    "Label": {
-                        "lang_tag": "device_settings_page",
-                        "text": "Controlled device action"
-                    },
-                    "Display": {
-                        "Top": 210,
-                        "Left": 290,
-                        "Width": 120,
-                        "Height": 20
-                    }
-                },			
-                {
-                    "ControlType": "variable",
-                    "Display": {
-                        "Service": "urn:demo-micasaverde-com:serviceId:MpcControl1",
-                        "Variable": "ctrlActionType",
-                        "Top": 210,
-                        "Left": 430,
-                        "Width": 240,
-                        "Height": 20
-                    }
-                },
-                {
-                    "ControlType": "input",
-                    "ID": "ctrlActionType",
-                    "Display": {					
-                        "Top": 230,
-                        "Left": 290,
-                        "Width": 100,
-                        "Height": 20
-                    }
-                },
-                {
-                    "ControlType": "label",
-                    "Label": {
-                        "lang_tag": "device_settings_page",
-                        "text": "Controlled device variable"
-                    },
-                    "Display": {
-                        "Top": 270,
-                        "Left": 290,
-                        "Width": 120,
-                        "Height": 20
-                    }
-                },			
-                {
-                    "ControlType": "variable",
-                    "Display": {
-                        "Service": "urn:demo-micasaverde-com:serviceId:MpcControl1",
-                        "Variable": "ctrlVariableType",
-                        "Top": 270,
-                        "Left": 435,
-                        "Width": 240,
-                        "Height": 20
-                    }
-                },
-                {
-                    "ControlType": "input",
-                    "ID": "ctrlVariableType",
-                    "Display": {					
-                        "Top": 290,
-                        "Left": 290,
-                        "Width": 100,
-                        "Height": 20
-                    }
-                },
-                {
-                    "ControlType": "button",
-                    "Label": {
-                        "lang_tag": "cmd_set",
-                        "text": "Set"
-                    },
-                    "Display": {
-                        "Top": 290,
-                        "Left": 400,
-                        "Width": 100,
-                        "Height": 20
-                    },
-                    "Command": {
-                        "Service": "urn:demo-micasaverde-com:serviceId:MpcControl1",
-                        "Action": "setCtrlDevice",
-                        "Parameters": [
-                            {
-                                "Name": "xDeviceId",
-                                "ID": "ctrlDeviceId"
-                            },
-                            {
-                                "Name": "xServiceId",
-                                "ID": "ctrlServiceId"
-                            },
-                            {
-                                "Name": "xAction",
-                                "ID": "ctrlActionType"
-                            },
-                            {
-                                "Name": "xVariable",
-                                "ID": "ctrlVariableType"
-                            }							
-                        ]
-                    }
-                },
-                {
-                    "ControlType": "label",
-                    "Label": {
-                        "lang_tag": "device_settings_page",
-                        "text": "------------------------------------------"
-                    },
-                    "Display": {
-                        "Top": 350,
-                        "Left": 50,
-                        "Width": 120,
-                        "Height": 10
-                    }
-                },		
-				{
-                    "ControlType": "label",
-                    "Label": {
-                        "lang_tag": "device_settings_page",
-                        "text": "Measuring device id"
-                    },
-                    "Display": {
-                        "Top": 360,
-                        "Left": 50,
-                        "Width": 120,
-                        "Height": 20
-                    }
-                },
-                {
-                    "ControlType": "variable",
-                    "Display": {
-                        "Service": "urn:demo-micasaverde-com:serviceId:MpcControl1",
-                        "Variable": "mesDeviceId",
-                        "Top": 360,
-                        "Left": 180,
-                        "Width": 100,
-                        "Height": 20
-                    }
-                },
-                {
-                    "ControlType": "input",
-                    "ID": "mesDeviceId",
-                    "Display": {
-                        "Top": 380,
-                        "Left": 50,
-                        "Width": 100,
-                        "Height": 20
-                    }
-                },				
-                {
-                    "ControlType": "label",
-                    "Label": {
-                        "lang_tag": "device_settings_page",
-                        "text": "Measuring device service id "
-                    },
-                    "Display": {
-                        "Top": 410,
-                        "Left": 50,
-                        "Width": 120,
-                        "Height": 20
-                    }
-                },
-				{
-                    "ControlType": "variable",
-                    "Display": {
-                        "Service": "urn:demo-micasaverde-com:serviceId:MpcControl1",
-                        "Variable": "mesServiceId",
-                        "Top": 430,
-                        "Left": 180,
-                        "Width": 100,
-                        "Height": 20						
-                    }
-                },
-                {
-                    "ControlType": "input",
-                    "ID": "mesServiceId",
-                    "Display": {
-                        "Top": 430,
-                        "Left": 50,
-                        "Width": 100,
-                        "Height": 20					
-                    }
-                },								
-                {
-                    "ControlType": "label",
-                    "Label": {
-                        "lang_tag": "device_settings_page",
-                        "text": "Measuring device variable"
-                    },
-                    "Display": {
-                        "Top": 360,
-                        "Left": 290,
-                        "Width": 120,
-                        "Height": 20
-                    }
-                },			
-                {
-                    "ControlType": "variable",
-                    "Display": {
-                        "Service": "urn:demo-micasaverde-com:serviceId:MpcControl1",
-                        "Variable": "mesVariableType",
-                        "Top": 360,
-                        "Left": 435,
-                        "Width": 240,
-                        "Height": 20
-                    }
-                },
-                {
-                    "ControlType": "input",
-                    "ID": "mesVariableType",
-                    "Display": {					
-                        "Top": 380,
-                        "Left": 290,
-                        "Width": 100,
-                        "Height": 20
-                    }
-                },
-                {
-                    "ControlType": "button",
-                    "Label": {
-                        "lang_tag": "cmd_set",
-                        "text": "Set"
-                    },
-                    "Display": {
-                        "Top": 380,
-                        "Left": 400,
-                        "Width": 100,
-                        "Height": 20
-                    },
-                    "Command": {
-                        "Service": "urn:demo-micasaverde-com:serviceId:MpcControl1",
-                        "Action": "setMesDevice",
-                        "Parameters": [
-                            {
-                                "Name": "xDeviceId",
-                                "ID": "mesDeviceId"
-                            },
-                            {
-                                "Name": "xServiceId",
-                                "ID": "mesServiceId"
-                            },
-                            {
-                                "Name": "xVariable",
-                                "ID": "mesVariableType"
-                            }						
-                        ]
-                    }
-                },
-                {
-                    "ControlType": "label",
-                    "Label": {
-                        "lang_tag": "device_settings_page",
-                        "text": "------------------------------------------"
-                    },
-                    "Display": {
-                        "Top": 460,
-                        "Left": 50,
-                        "Width": 120,
-                        "Height": 10
-                    }
-                },		
-				{
-                    "ControlType": "label",
-                    "Label": {
-                        "lang_tag": "device_settings_page",
-                        "text": "Set Point"
-                    },
-                    "Display": {
-                        "Top": 470,
-                        "Left": 50,
-                        "Width": 120,
-                        "Height": 20
-                    }
-                },
-                {
-                    "ControlType": "variable",
-                    "Display": {
-                        "Service": "urn:demo-micasaverde-com:serviceId:MpcControl1",
-                        "Variable": "setpoint",
-                        "Top": 470,
-                        "Left": 150,
-                        "Width": 100,
-                        "Height": 20
-                    }
-                },
-                {
-                    "ControlType": "input",
-                    "ID": "setpoint",
-                    "Display": {
-                        "Top": 490,
-                        "Left": 50,
-                        "Width": 100,
-                        "Height": 20
-                    }
-                },		
-                {
-                    "ControlType": "button",
-                    "Label": {
-                        "lang_tag": "cmd_set",
-                        "text": "Set"
-                    },
-                    "Display": {
-                        "Top": 490,
-                        "Left": 180,
-                        "Width": 60,
-                        "Height": 20
-                    },
-                    "Command": {
-                        "Service": "urn:demo-micasaverde-com:serviceId:MpcControl1",
-                        "Action": "setSetPoint",
-                        "Parameters": [
-                            {
-                                "Name": "xSetpoint",
-                                "ID": "setpoint"
-                            }
-                        ]						
-                    }					
-                },				
-                {
-                    "ControlType": "label",
-                    "Label": {
-                        "lang_tag": "device_settings_page",
-                        "text": "Computed U "
-                    },
-                    "Display": {
-                        "Top": 520,
-                        "Left": 50,
-                        "Width": 120,
-                        "Height": 20
-                    }
-                },
-				{
-                    "ControlType": "variable",
-                    "Display": {
-                        "Service": "urn:demo-micasaverde-com:serviceId:MpcControl1",
-                        "Variable": "computedU",
-                        "Top": 520,
-                        "Left": 180,
-                        "Width": 100,
-                        "Height": 20						
-                    }
-                },	
-                {
-                    "ControlType": "label",
-                    "Label": {
-                        "lang_tag": "device_settings_page",
-                        "text": "Computed Y "
-                    },
-                    "Display": {
-                        "Top": 520,
-                        "Left": 290,
-                        "Width": 120,
-                        "Height": 20
-                    }
-                },
-				{
-                    "ControlType": "variable",
-                    "Display": {
-                        "Service": "urn:demo-micasaverde-com:serviceId:MpcControl1",
-                        "Variable": "computedY",
-                        "Top": 520,
-                        "Left": 420,
-                        "Width": 100,
-                        "Height": 20						
-                    }
-                }				
+                }			
             ]
         },
         {

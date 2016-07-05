@@ -6,9 +6,9 @@ TYPE_POST = "POST"
 local DEVICE_ID
 local PARENT_DEVICE
 local DEVICE_TYPE = "urn:demo-micasaverde-com:device:RestHandler:1"
-local MSG_CLASS = "MpcClient"
+local MSG_CLASS = "RestHandler"
 
-local DEBUG_MODE = true
+local DEBUG_MODE = false
 local taskHandle = -1
 
 local TASK_ERROR = 2
@@ -113,18 +113,22 @@ function doRead()
     local samplePeriod = luup.variable_get(RESTHANDLE_SERVICE, "samplePeriod", PARENT_DEVICE) 
 	local param = luup.variable_get(RESTHANDLE_SERVICE, "inputObjectName", PARENT_DEVICE) 
 	local ltype = luup.variable_get(RESTHANDLE_SERVICE, "inputObjectType", PARENT_DEVICE) 
-	local yValue = readResource(param, ltype, samplePeriod)
+	local lobj = luup.variable_get(RESTHANDLE_SERVICE, "outputObjectName", PARENT_DEVICE)
+	local yValue = readResource(param, ltype, samplePeriod, lobj)
 	if yValue then
 		 luup.variable_set(RESTHANDLE_SERVICE, "outputObjectValue", yValue, PARENT_DEVICE)
-		 luup.call_timer("nextRead", 1, tostring(samplePeriod), "")
 	end
 end
 
-function readResource(xParam, xType, xSamplePeriod)
+function readResource(xParam, xType, xSamplePeriod, xObject)
 
+    luup.variable_set(RESTHANDLE_SERVICE, "inputObjectName", xParam, PARENT_DEVICE)
+	luup.variable_set(RESTHANDLE_SERVICE, "inputObjectType", xType, PARENT_DEVICE)
+	luup.variable_set(RESTHANDLE_SERVICE, "samplePeriod", xSamplePeriod, PARENT_DEVICE)
+	luup.variable_set(RESTHANDLE_SERVICE, "outputObjectName", xObject, PARENT_DEVICE)
 	local bypass = luup.variable_get(RESTHANDLE_SERVICE, "bypass", PARENT_DEVICE)
-	local samplePeriod =luup.variable_get(RESTHANDLE_SERVICE, "samplePeriod", PARENT_DEVICE)
-	local lobject =luup.variable_get(RESTHANDLE_SERVICE, "outputObjectName", PARENT_DEVICE)
+	local samplePeriod = xSamplePeriod
+	local lobject = xObject 
 	local yValue = ""
 	if bypass~="1" then
 		local url = luup.variable_get(RESTHANDLE_SERVICE, "restUrl", PARENT_DEVICE)
@@ -150,11 +154,11 @@ function readResource(xParam, xType, xSamplePeriod)
 			end
 			yValue = lvalue
 		end
-    end
-    if samplePeriod > 0 then
-		debug("timer for nextRead set in " .. tostring(samplePeriod) .. " sec.")
-		luup.call_timer("nextRead", 1, tostring(samplePeriod), "")			
-	then
+		if tonumber(samplePeriod) > 0 then
+			debug("timer for nextRead set in " .. tostring(samplePeriod) .. " sec.")
+			luup.call_timer("nextRead", 1, tostring(samplePeriod), "")			
+		end
+	end
 	return yValue;
 end
 
@@ -168,7 +172,9 @@ function parseJson(xString)
 function sendJsonRequest(xUrl,xPayload,xMethod)
   --local path = "http://192.168.1.16:3500/inputs"
   local path = xUrl
+  package.loaded.http = nil
   local http = require("socket.http")
+  package.loaded.ltn12 = nil
   local ltn12 = require("ltn12")
   --local payload = [[ {"key":"My Key","name":"My Name","description":"The description","state":1} ]]
   local payload = xPayload
@@ -187,6 +193,9 @@ function sendJsonRequest(xUrl,xPayload,xMethod)
     source = ltn12.source.string(payload),
     sink = ltn12.sink.table(response_body)
   }
+  package.loaded.http = nil
+  package.loaded.ltn12 = nil
+  collectgarbage("collect")
   return code, table.concat(response_body)
 end
 
